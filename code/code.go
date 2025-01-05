@@ -1,0 +1,78 @@
+package code
+
+// #include <srt/srt.h>
+import "C"
+import "fmt"
+
+type Major int8
+
+const (
+	MJ_UNKNOWN    = Major(C.MJ_UNKNOWN)
+	MJ_SUCCESS    = Major(C.MJ_SUCCESS)
+	MJ_SETUP      = Major(C.MJ_SETUP)
+	MJ_CONNECTION = Major(C.MJ_CONNECTION)
+	MJ_SYSTEMRES  = Major(C.MJ_SYSTEMRES)
+	MJ_FILESYSTEM = Major(C.MJ_FILESYSTEM)
+	MJ_NOTSUP     = Major(C.MJ_NOTSUP)
+	MJ_AGAIN      = Major(C.MJ_AGAIN)
+	MJ_PEERERROR  = Major(C.MJ_PEERERROR)
+)
+
+type Minor int8
+
+const (
+	// MJ_SETUP
+	MN_NONE     = Minor(C.MN_NONE)
+	MN_TIMEOUT  = Minor(C.MN_TIMEOUT)
+	MN_REJECTED = Minor(C.MN_REJECTED)
+	MN_NORES    = Minor(C.MN_NORES)
+	MN_SECURITY = Minor(C.MN_SECURITY)
+	MN_CLOSED   = Minor(C.MN_CLOSED)
+
+	// MJ_CONNECTION
+	MN_CONNLOST = Minor(C.MN_CONNLOST)
+	MN_NOCONN   = Minor(C.MN_NOCONN)
+
+	// MJ_SYSTEMRES
+	MN_THREAD = Minor(C.MN_THREAD)
+	MN_MEMORY = Minor(C.MN_MEMORY)
+	MN_OBJECT = Minor(C.MN_OBJECT)
+
+	// MJ_FILESYSTEM
+	MN_SEEKGFAIL = Minor(C.MN_SEEKGFAIL)
+	MN_READFAIL  = Minor(C.MN_READFAIL)
+	MN_SEEKPFAIL = Minor(C.MN_SEEKPFAIL)
+	MN_WRITEFAIL = Minor(C.MN_WRITEFAIL)
+
+	// MJ_NOTSUP
+	MN_ISBOUND        = Minor(C.MN_ISBOUND)
+	MN_ISCONNECTED    = Minor(C.MN_ISCONNECTED)
+	MN_INVAL          = Minor(C.MN_INVAL)
+	MN_SIDINVAL       = Minor(C.MN_SIDINVAL)
+	MN_ISUNBOUND      = Minor(C.MN_ISUNBOUND)
+	MN_NOLISTEN       = Minor(C.MN_NOLISTEN)
+	MN_ISRENDEZVOUS   = Minor(C.MN_ISRENDEZVOUS)
+	MN_ISRENDUNBOUND  = Minor(C.MN_ISRENDUNBOUND)
+	MN_INVALMSGAPI    = Minor(C.MN_INVALMSGAPI)
+	MN_INVALBUFFERAPI = Minor(C.MN_INVALBUFFERAPI)
+	MN_BUSY           = Minor(C.MN_BUSY)
+	MN_XSIZE          = Minor(C.MN_XSIZE)
+	MN_EIDINVAL       = Minor(C.MN_EIDINVAL)
+	MN_EEMPTY         = Minor(C.MN_EEMPTY)
+	MN_BUSYPORT       = Minor(C.MN_BUSYPORT)
+
+	// MJ_AGAIN
+	MN_WRAVAIL    = Minor(C.MN_WRAVAIL)
+	MN_RDAVAIL    = Minor(C.MN_RDAVAIL)
+	MN_XMTIMEOUT  = Minor(C.MN_XMTIMEOUT)
+	MN_CONGESTION = Minor(C.MN_CONGESTION)
+)
+
+type Code struct {
+	Major
+	Minor
+}
+
+func (min Minor) Error() string {
+	return fmt.Sprintf("minor_code_%d", int(min))
+}
