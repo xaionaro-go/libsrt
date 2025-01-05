@@ -1,4 +1,4 @@
-package libsrt
+package threadsafe
 
 import (
 	"sync"
