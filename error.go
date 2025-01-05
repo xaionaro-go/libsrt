@@ -12,10 +12,10 @@ func (SomeError) Error() string {
 }
 
 type Error struct {
-	Code  CodeMinor
+	Code  Code
 	Errno Errno
 }
 
 func (err Error) Error() string {
-	return fmt.Sprintf("code:%d, errno:%d: %s", err.Code, err.Errno, Strerror(err.Code, err.Errno))
+	return fmt.Sprintf("code:0x%X, errno:%d: %s", int16(err.Code), err.Errno, Strerror(err.Code, err.Errno))
 }

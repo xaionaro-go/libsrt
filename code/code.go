@@ -2,9 +2,8 @@ package code
 
 // #include <srt/srt.h>
 import "C"
-import "fmt"
 
-type Major int8
+type Major int
 
 const (
 	MJ_UNKNOWN    = Major(C.MJ_UNKNOWN)
@@ -18,7 +17,7 @@ const (
 	MJ_PEERERROR  = Major(C.MJ_PEERERROR)
 )
 
-type Minor int8
+type Minor int
 
 const (
 	// MJ_SETUP
@@ -68,11 +67,4 @@ const (
 	MN_CONGESTION = Minor(C.MN_CONGESTION)
 )
 
-type Code struct {
-	Major
-	Minor
-}
-
-func (min Minor) Error() string {
-	return fmt.Sprintf("minor_code_%d", int(min))
-}
+type Code int

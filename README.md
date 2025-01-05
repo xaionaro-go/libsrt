@@ -14,6 +14,7 @@ package myfancypkg
 import (
     "github.com/xaionaro-go/libsrt"
     "github.com/xaionaro-go/libsrt/sockopt"
+    "github.com/xaionaro-go/libsrt/extras/xastiav"
 )
 
 func myFancyFunc() {
@@ -21,13 +22,7 @@ func myFancyFunc() {
 
     // extracting the file descriptor from a go-astiav's structure:
 
-    privData := output.FormatContext.PrivateData()
-    if privData == nil {
-        return nil, fmt.Errorf("failed to get 'priv_data'")
-    }
-
-    privDataCP := *unsafetools.FieldByName(privData, "c").(*unsafe.Pointer)
-    sockC := C.int(uintptr(privDataCP))
+    sockS := xastiav.GetFDFromFormatContext(formatCtx)
 
     // manipulating the SRT socket
 

@@ -9,7 +9,7 @@ func Getlasterror() Error {
 	var errnoC C.int
 	code := C.srt_getlasterror(&errnoC)
 	return Error{
-		Code:  CodeMinor(code),
+		Code:  Code(code),
 		Errno: Errno(errnoC),
 	}
 }
