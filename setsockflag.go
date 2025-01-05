@@ -15,7 +15,7 @@ func (s *Socket) Setsockflag(
 	value SockoptValue,
 ) error {
 	ptr := value.Pointer()
-	rc := C.srt_setsockflag(s.C, C.SRT_SOCKOPT(opt), ptr, C.int(value.Size()))
+	rc := C.srt_setsockflag(s.C, C.SRT_SOCKOPT(opt), ptr, value.Size())
 	if rc != 0 {
 		return SomeError{}
 	}

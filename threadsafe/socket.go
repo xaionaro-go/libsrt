@@ -77,3 +77,32 @@ func (s *Socket) Setsockopt(
 	}
 	return err
 }
+
+func (s *Socket) Getsockopt(
+	limit int,
+	opt libsrt.Sockopt,
+	value libsrt.SockoptValueWritable,
+) error {
+	LibSrtLocker.Lock()
+	defer LibSrtLocker.Unlock()
+
+	err := s.Socket.Getsockopt(limit, opt, value)
+	if err != nil {
+		err = libsrt.Getlasterror()
+	}
+	return err
+}
+
+func (s *Socket) Getsockflag(
+	opt libsrt.Sockopt,
+	value libsrt.SockoptValueWritable,
+) error {
+	LibSrtLocker.Lock()
+	defer LibSrtLocker.Unlock()
+
+	err := s.Socket.Getsockflag(opt, value)
+	if err != nil {
+		err = libsrt.Getlasterror()
+	}
+	return err
+}

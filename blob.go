@@ -9,7 +9,12 @@ import (
 
 type Blob interface {
 	Pointer() unsafe.Pointer
-	Size() uintptr
+	Size() C.int
+}
+
+type BlobWritable interface {
+	Blob
+	SizePointer() *C.int
 }
 
 type BlobInt int
@@ -18,8 +23,13 @@ func (i *BlobInt) Pointer() unsafe.Pointer {
 	return unsafe.Pointer(i)
 }
 
-func (i BlobInt) Size() uintptr {
-	return unsafe.Sizeof(i)
+func (i *BlobInt) SizePointer() *C.int {
+	dummySize := i.Size()
+	return &dummySize
+}
+
+func (i BlobInt) Size() C.int {
+	return C.int(unsafe.Sizeof(i))
 }
 
 type BlobStringReadonly string
@@ -32,6 +42,6 @@ func (s BlobStringReadonly) Pointer() unsafe.Pointer {
 	return unsafe.Pointer(cString)
 }
 
-func (s BlobStringReadonly) Size() uintptr {
-	return uintptr(len(s))
+func (s BlobStringReadonly) Size() C.int {
+	return C.int(len(s))
 }

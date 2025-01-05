@@ -13,7 +13,7 @@ func (s *Socket) Setsockopt(
 	value SockoptValue,
 ) error {
 	ptr := value.Pointer()
-	rc := C.srt_setsockopt(s.C, C.int(level), C.SRT_SOCKOPT(opt), ptr, C.int(value.Size()))
+	rc := C.srt_setsockopt(s.C, C.int(level), C.SRT_SOCKOPT(opt), ptr, value.Size())
 	if rc != 0 {
 		return SomeError{}
 	}
