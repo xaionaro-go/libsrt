@@ -2,7 +2,10 @@ package sockopt
 
 // #include <srt/srt.h>
 import "C"
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type Sockopt C.SRT_SOCKOPT
 
@@ -193,4 +196,130 @@ func (opt Sockopt) String() string {
 		return "E_SIZE"
 	}
 	return fmt.Sprintf("unexpected_sockopt_%d", opt)
+}
+
+func FromString(s string) (Sockopt, bool) {
+	switch strings.ToUpper(s) {
+	case MSS.String():
+		return MSS, true
+	case SNDSYN.String():
+		return SNDSYN, true
+	case RCVSYN.String():
+		return RCVSYN, true
+	case ISN.String():
+		return ISN, true
+	case FC.String():
+		return FC, true
+	case SNDBUF.String():
+		return SNDBUF, true
+	case RCVBUF.String():
+		return RCVBUF, true
+	case LINGER.String():
+		return LINGER, true
+	case UDP_SNDBUF.String():
+		return UDP_SNDBUF, true
+	case UDP_RCVBUF.String():
+		return UDP_RCVBUF, true
+	case RENDEZVOUS.String():
+		return RENDEZVOUS, true
+	case SNDTIMEO.String():
+		return SNDTIMEO, true
+	case RCVTIMEO.String():
+		return RCVTIMEO, true
+	case REUSEADDR.String():
+		return REUSEADDR, true
+	case MAXBW.String():
+		return MAXBW, true
+	case STATE.String():
+		return STATE, true
+	case EVENT.String():
+		return EVENT, true
+	case SNDDATA.String():
+		return SNDDATA, true
+	case RCVDATA.String():
+		return RCVDATA, true
+	case SENDER.String():
+		return SENDER, true
+	case TSBPDMODE.String():
+		return TSBPDMODE, true
+	case LATENCY.String():
+		return LATENCY, true
+	case INPUTBW.String():
+		return INPUTBW, true
+	case OHEADBW.String():
+		return OHEADBW, true
+	case PASSPHRASE.String():
+		return PASSPHRASE, true
+	case PBKEYLEN.String():
+		return PBKEYLEN, true
+	case KMSTATE.String():
+		return KMSTATE, true
+	case IPTTL.String():
+		return IPTTL, true
+	case IPTOS.String():
+		return IPTOS, true
+	case TLPKTDROP.String():
+		return TLPKTDROP, true
+	case SNDDROPDELAY.String():
+		return SNDDROPDELAY, true
+	case NAKREPORT.String():
+		return NAKREPORT, true
+	case VERSION.String():
+		return VERSION, true
+	case PEERVERSION.String():
+		return PEERVERSION, true
+	case CONNTIMEO.String():
+		return CONNTIMEO, true
+	case DRIFTTRACER.String():
+		return DRIFTTRACER, true
+	case MININPUTBW.String():
+		return MININPUTBW, true
+	case SNDKMSTATE.String():
+		return SNDKMSTATE, true
+	case RCVKMSTATE.String():
+		return RCVKMSTATE, true
+	case LOSSMAXTTL.String():
+		return LOSSMAXTTL, true
+	case RCVLATENCY.String():
+		return RCVLATENCY, true
+	case PEERLATENCY.String():
+		return PEERLATENCY, true
+	case MINVERSION.String():
+		return MINVERSION, true
+	case STREAMID.String():
+		return STREAMID, true
+	case CONGESTION.String():
+		return CONGESTION, true
+	case MESSAGEAPI.String():
+		return MESSAGEAPI, true
+	case PAYLOADSIZE.String():
+		return PAYLOADSIZE, true
+	case TRANSTYPE.String():
+		return TRANSTYPE, true
+	case KMREFRESHRATE.String():
+		return KMREFRESHRATE, true
+	case KMPREANNOUNCE.String():
+		return KMPREANNOUNCE, true
+	case ENFORCEDENCRYPTION.String():
+		return ENFORCEDENCRYPTION, true
+	case IPV6ONLY.String():
+		return IPV6ONLY, true
+	case PEERIDLETIMEO.String():
+		return PEERIDLETIMEO, true
+	case BINDTODEVICE.String():
+		return BINDTODEVICE, true
+	case GROUPCONNECT.String():
+		return GROUPCONNECT, true
+	case GROUPMINSTABLETIMEO.String():
+		return GROUPMINSTABLETIMEO, true
+	case GROUPTYPE.String():
+		return GROUPTYPE, true
+	case PACKETFILTER.String():
+		return PACKETFILTER, true
+	case RETRANSMITALGO.String():
+		return RETRANSMITALGO, true
+	case E_SIZE.String():
+		return E_SIZE, true
+	}
+	return Sockopt(0), false
 }
