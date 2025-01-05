@@ -6,7 +6,7 @@ import (
 	"github.com/xaionaro-go/libsrt"
 )
 
-var LibSrtLocker sync.Mutex
+var LibSRTLocker sync.Mutex
 
 type Socket struct {
 	Socket *libsrt.Socket
@@ -25,8 +25,8 @@ func WrapSocket(s *libsrt.Socket) *Socket {
 func (s *Socket) Bstats(
 	clear bool,
 ) (*libsrt.TRACEBSTATS, error) {
-	LibSrtLocker.Lock()
-	defer LibSrtLocker.Unlock()
+	LibSRTLocker.Lock()
+	defer LibSRTLocker.Unlock()
 
 	result, err := s.Socket.Bstats(clear)
 	if err != nil {
@@ -39,8 +39,8 @@ func (s *Socket) Bistats(
 	clear bool,
 	instantaneous bool,
 ) (*libsrt.TRACEBSTATS, error) {
-	LibSrtLocker.Lock()
-	defer LibSrtLocker.Unlock()
+	LibSRTLocker.Lock()
+	defer LibSRTLocker.Unlock()
 
 	result, err := s.Socket.Bistats(clear, instantaneous)
 	if err != nil {
@@ -53,8 +53,8 @@ func (s *Socket) Setsockflag(
 	opt libsrt.Sockopt,
 	value libsrt.SockoptValue,
 ) error {
-	LibSrtLocker.Lock()
-	defer LibSrtLocker.Unlock()
+	LibSRTLocker.Lock()
+	defer LibSRTLocker.Unlock()
 
 	err := s.Socket.Setsockflag(opt, value)
 	if err != nil {
@@ -68,8 +68,8 @@ func (s *Socket) Setsockopt(
 	opt libsrt.Sockopt,
 	value libsrt.SockoptValue,
 ) error {
-	LibSrtLocker.Lock()
-	defer LibSrtLocker.Unlock()
+	LibSRTLocker.Lock()
+	defer LibSRTLocker.Unlock()
 
 	err := s.Socket.Setsockopt(limit, opt, value)
 	if err != nil {
@@ -83,8 +83,8 @@ func (s *Socket) Getsockopt(
 	opt libsrt.Sockopt,
 	value libsrt.SockoptValueWritable,
 ) error {
-	LibSrtLocker.Lock()
-	defer LibSrtLocker.Unlock()
+	LibSRTLocker.Lock()
+	defer LibSRTLocker.Unlock()
 
 	err := s.Socket.Getsockopt(limit, opt, value)
 	if err != nil {
@@ -97,8 +97,8 @@ func (s *Socket) Getsockflag(
 	opt libsrt.Sockopt,
 	value libsrt.SockoptValueWritable,
 ) error {
-	LibSrtLocker.Lock()
-	defer LibSrtLocker.Unlock()
+	LibSRTLocker.Lock()
+	defer LibSRTLocker.Unlock()
 
 	err := s.Socket.Getsockflag(opt, value)
 	if err != nil {
