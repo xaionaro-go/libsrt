@@ -2,6 +2,7 @@ package sockopt
 
 // #include <srt/srt.h>
 import "C"
+import "fmt"
 
 type Sockopt C.SRT_SOCKOPT
 
@@ -67,3 +68,129 @@ const (
 	RETRANSMITALGO      = Sockopt(C.SRTO_RETRANSMITALGO)
 	E_SIZE              = Sockopt(C.SRTO_E_SIZE)
 )
+
+func (opt Sockopt) String() string {
+	switch opt {
+	case MSS:
+		return "MSS"
+	case SNDSYN:
+		return "SNDSYN"
+	case RCVSYN:
+		return "RCVSYN"
+	case ISN:
+		return "ISN"
+	case FC:
+		return "FC"
+	case SNDBUF:
+		return "SNDBUF"
+	case RCVBUF:
+		return "RCVBUF"
+	case LINGER:
+		return "LINGER"
+	case UDP_SNDBUF:
+		return "UDP_SNDBUF"
+	case UDP_RCVBUF:
+		return "UDP_RCVBUF"
+	case RENDEZVOUS:
+		return "RENDEZVOUS"
+	case SNDTIMEO:
+		return "SNDTIMEO"
+	case RCVTIMEO:
+		return "RCVTIMEO"
+	case REUSEADDR:
+		return "REUSEADDR"
+	case MAXBW:
+		return "MAXBW"
+	case STATE:
+		return "STATE"
+	case EVENT:
+		return "EVENT"
+	case SNDDATA:
+		return "SNDDATA"
+	case RCVDATA:
+		return "RCVDATA"
+	case SENDER:
+		return "SENDER"
+	case TSBPDMODE:
+		return "TSBPDMODE"
+	case LATENCY:
+		return "LATENCY"
+	case INPUTBW:
+		return "INPUTBW"
+	case OHEADBW:
+		return "OHEADBW"
+	case PASSPHRASE:
+		return "PASSPHRASE"
+	case PBKEYLEN:
+		return "PBKEYLEN"
+	case KMSTATE:
+		return "KMSTATE"
+	case IPTTL:
+		return "IPTTL"
+	case IPTOS:
+		return "IPTOS"
+	case TLPKTDROP:
+		return "TLPKTDROP"
+	case SNDDROPDELAY:
+		return "SNDDROPDELAY"
+	case NAKREPORT:
+		return "NAKREPORT"
+	case VERSION:
+		return "VERSION"
+	case PEERVERSION:
+		return "PEERVERSION"
+	case CONNTIMEO:
+		return "CONNTIMEO"
+	case DRIFTTRACER:
+		return "DRIFTTRACER"
+	case MININPUTBW:
+		return "MININPUTBW"
+	case SNDKMSTATE:
+		return "SNDKMSTATE"
+	case RCVKMSTATE:
+		return "RCVKMSTATE"
+	case LOSSMAXTTL:
+		return "LOSSMAXTTL"
+	case RCVLATENCY:
+		return "RCVLATENCY"
+	case PEERLATENCY:
+		return "PEERLATENCY"
+	case MINVERSION:
+		return "MINVERSION"
+	case STREAMID:
+		return "STREAMID"
+	case CONGESTION:
+		return "CONGESTION"
+	case MESSAGEAPI:
+		return "MESSAGEAPI"
+	case PAYLOADSIZE:
+		return "PAYLOADSIZE"
+	case TRANSTYPE:
+		return "TRANSTYPE"
+	case KMREFRESHRATE:
+		return "KMREFRESHRATE"
+	case KMPREANNOUNCE:
+		return "KMPREANNOUNCE"
+	case ENFORCEDENCRYPTION:
+		return "ENFORCEDENCRYPTION"
+	case IPV6ONLY:
+		return "IPV6ONLY"
+	case PEERIDLETIMEO:
+		return "PEERIDLETIMEO"
+	case BINDTODEVICE:
+		return "BINDTODEVICE"
+	case GROUPCONNECT:
+		return "GROUPCONNECT"
+	case GROUPMINSTABLETIMEO:
+		return "GROUPMINSTABLETIMEO"
+	case GROUPTYPE:
+		return "GROUPTYPE"
+	case PACKETFILTER:
+		return "PACKETFILTER"
+	case RETRANSMITALGO:
+		return "RETRANSMITALGO"
+	case E_SIZE:
+		return "E_SIZE"
+	}
+	return fmt.Sprintf("unexpected_sockopt_%d", opt)
+}
