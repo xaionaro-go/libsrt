@@ -1,5 +1,6 @@
 package code
 
+// #cgo pkg-config: srt
 // #include <srt/srt.h>
 import "C"
 
